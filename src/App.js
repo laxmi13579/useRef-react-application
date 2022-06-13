@@ -1,24 +1,20 @@
-import logo from './logo.svg';
+import { useEffect, useState, useRef } from 'react';
 import './App.css';
 
 function App() {
+  const [name, setName] = useState('');
+  //by default it contain current object to 1, eg. {current: 1}
+  const countRender = useRef(1);
+  useEffect(()=>{
+    countRender.current = countRender.current + 1;
+  })
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <h1>Welcome!!</h1>
+    <input  value={name} onChange={(e)=>setName(e.target.value)}/>
+    <p>my name is {name}</p>
+    <p>render count {countRender.current}</p>
+    </>
   );
 }
 
