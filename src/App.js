@@ -4,18 +4,19 @@ import './App.css';
 function App() {
   const [name, setName] = useState('');
   //by default it contain current object to 1, eg. {current: 1}
-  const  inputRef = useRef(1);
-  
-  function focus() {
-    inputRef.current.focus()
-  }
+  const  prevValue = useRef();
+  console.log('name',name)
+  console.log('prevValue',prevValue.current)
+  useEffect(()=>{
+    prevValue.current = name;
+  },[name])
 
   return (
     <>
     <h1>Welcome!!</h1>
-    <input ref={inputRef} value={name} onChange={(e)=>setName(e.target.value)}/>
+    <input  value={name} onChange={(e)=>setName(e.target.value)}/>
     <p>my name is {name}</p>
-    <button onClick={focus} >Focus</button>
+    <p>prev state value is {prevValue.current} </p>
     </>
   );
 }
